@@ -1,0 +1,17 @@
+{
+  "name": "my_caesar_cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "my_caesar_cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "minimist": "^1.2.5",
+    "through2": "^4.0.2"
+  }
+}
