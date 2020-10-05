@@ -2,22 +2,33 @@ const minimist = require('minimist');
 
 const args = minimist(process.argv.slice(2))
 
+let shift = args.s || args.shift,
+    action = args.a || args.action,
+    output = args.o || args.output,
+    input = args.i || args.input;
+
 if (parseInt(args.s) < 0 || parseInt(args.shift) < 0) {
   console.error('Action (encode/decode) and the shift are required, please prompt it' + ', error code: ' + process.stderr.fd)
-} else if ((args.s || args.shift) && 
-          (args.a || args.action) && 
-          !(args.o || args.output) &&
-          (args.i || args.input)) {
-  require('./input_read.js')(args)
+} else if (shift && 
+          (action) && 
+          !output &&
+          input) {
+  require('./output_no.js')(shift, action, input)
 
-} else if((args.s || args.shift) && 
-          (args.a || args.action) && 
-          (args.o || args.output) &&
-          (args.i || args.input)) {
-  require('./output_write.js')(args)
+} else if(shift && 
+          (action) && 
+          output &&
+          input) {
+  require('./output.js')(shift, action, input, output)
 
-} else if ((args.s || args.shift) && (args.a || args.action)) {
-  require('./action_cmd.js')(args)
+} else if(shift && 
+          (action) && 
+          output &&
+          !input) {
+  require('./input_no.js')(shift, action, output)
+
+} else if (shift && action) {
+  require('./action_cmd.js')(shift, action)
 
 } else {
   console.error('Action (encode/decode) and the shift are required, please prompt it' + ', error code: ' + process.stderr.fd)
